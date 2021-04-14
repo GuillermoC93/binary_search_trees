@@ -69,6 +69,14 @@ class Tree
     results
   end
 
+  def preorder(root = @root, results = [])
+    return results if root.nil?
+
+    results.push(root.data)
+    preorder(root.left, results)
+    preorder(root.right, results)
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
