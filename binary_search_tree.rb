@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Node class for each node
 class Node
   attr_accessor :data, :left, :right
 
@@ -8,6 +11,7 @@ class Node
   end
 end
 
+# Binary Search Tree class
 class Tree
   attr_accessor :arr, :root
 
