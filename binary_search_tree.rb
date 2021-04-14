@@ -28,7 +28,7 @@ class Tree
   end
 
   def insert(value, root = @root)
-    return Node.new(value) if root == nil
+    return Node.new(value) if root.nil?
     return root if root.data == value
 
     if value < root.data
@@ -38,6 +38,18 @@ class Tree
     end
 
     root
+  end
+
+  def find(value, root = @root)
+    return puts 'Value not found' if root.nil?
+
+    if value == root.data
+      puts "#{root}, Value: #{root.data}"
+    elsif value < root.data
+      find(value, root.left)
+    else
+      find(value, root.right)
+    end
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
