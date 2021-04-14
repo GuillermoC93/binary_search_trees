@@ -52,6 +52,19 @@ class Tree
     end
   end
 
+  def level_order
+    discovered = [root]
+    results = []
+    while discovered.empty? == false
+      current = discovered[0]
+      results << current.data
+      discovered.push(current.left) unless current.left.nil?
+      discovered.push(current.right) unless current.right.nil?
+      discovered.shift
+    end
+    results
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
