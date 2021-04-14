@@ -85,6 +85,14 @@ class Tree
     inorder(root.right, results)
   end
 
+  def postorder(root = @root, results = [])
+    return results if root.nil?
+
+    postorder(root.left, results)
+    postorder(root.right, results)
+    results.push(root.data)
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
