@@ -44,6 +44,18 @@ class Tree
     root
   end
 
+  def delete(value, root = @root)
+    return root if root.nil?
+
+    if value < root.data
+      root.left = delete(value, root.left)
+      root
+    elsif value > root.data
+      root.right = delete(value, root.right)
+      root
+    end
+  end
+
   def find(value, root = @root)
     return puts 'Value not found' if root.nil?
 
