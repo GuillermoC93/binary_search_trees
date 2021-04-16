@@ -54,8 +54,25 @@ class Tree
     else
       return root.right if root.left.nil?
       return root.left if root.right.nil?
+
+      succ = findmin(root.right)
+      root.data = succ.data
+      root.right = delete(succ.data, root.right)
     end
     root
+  end
+
+  def findmin(root = @root)
+    current = root
+    current = current.left while current.left
+
+    current
+  end
+
+  def left_most(node)
+    node = node.left until node.left.nil?
+
+    node
   end
 
   def find(value, root = @root)
