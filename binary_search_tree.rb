@@ -55,9 +55,9 @@ class Tree
       return root.right if root.left.nil?
       return root.left if root.right.nil?
 
-      succ = findmin(root.right)
-      root.data = succ.data
-      root.right = delete(succ.data, root.right)
+      child = findmin(root.right)
+      root.data = child.data
+      root.right = delete(child.data, root.right)
     end
     root
   end
