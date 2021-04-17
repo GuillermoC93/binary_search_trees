@@ -69,12 +69,6 @@ class Tree
     current
   end
 
-  def left_most(node)
-    node = node.left until node.left.nil?
-
-    node
-  end
-
   def find(value, root = @root)
     return puts 'Value not found' if root.nil?
 
@@ -88,14 +82,14 @@ class Tree
   end
 
   def level_order
-    discovered = [root]
+    queue = [root]
     results = []
-    while discovered.empty? == false
-      current = discovered[0]
+    until queue.empty?
+      current = queue[0]
       results << current.data
-      discovered.push(current.left) unless current.left.nil?
-      discovered.push(current.right) unless current.right.nil?
-      discovered.shift
+      queue.push(current.left) unless current.left.nil?
+      queue.push(current.right) unless current.right.nil?
+      queue.shift
     end
     results
   end
@@ -124,14 +118,12 @@ class Tree
     results.push(root.data)
   end
 
-  def search(value, root = @root)
-    if root.data == value
-      root
-    elsif value < root.data
-      search(value, root.left)
-    else
-      search(value, root.right)
-    end
+  def height(root = @root)
+    return -1 if root.nil?
+
+    left = height(root.left)
+    right = height(root.right)
+    right > left ? right + 1 : left + 1
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
