@@ -126,6 +126,22 @@ class Tree
     right > left ? right + 1 : left + 1
   end
 
+  def depth(value, root = @root)
+    return -1 if root.nil?
+
+    dist = -1
+
+    return dist + 1 if root.data == value
+
+    dist = depth(root.left, value)
+    return dist + 1 if dist >= 0
+
+    dist = depth(root.right, value)
+    return dist + 1 if dist >= 0
+
+    dist
+  end
+
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
