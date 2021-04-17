@@ -146,12 +146,17 @@ class Tree
     left = height(root.left)
     right = height(root.right)
     if left > right
-      !(left - right > 1)
+      (left - right <= 1)
     elsif right > left
-      !(right - left > 1)
+      (right - left <= 1)
     else
       true
     end
+  end
+
+  def rebalance
+    self.arr = level_order
+    self.root = build_tree(@arr)
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
