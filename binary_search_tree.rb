@@ -33,7 +33,6 @@ class Tree
 
   def insert(value, root = @root)
     return Node.new(value) if root.nil?
-    return root if root.data == value
 
     if value < root.data
       root.left = insert(value, root.left)
@@ -48,13 +47,18 @@ class Tree
     return root if root.nil?
 
     if value < root.data
+      # look for value in left subtree
       root.left = delete(value, root.left)
     elsif value > root.data
+      # look for value in right subtree
       root.right = delete(value, root.right)
     else
+      # when the node specified is found
+      # when 1 child or no children, since we check both left and right
       return root.right if root.left.nil?
       return root.left if root.right.nil?
 
+      # when node has 2 children
       child = findmin(root.right)
       root.data = child.data
       root.right = delete(child.data, root.right)
